@@ -1,0 +1,105 @@
+* {
+    color-base: #24273a;
+    color-base-transparent: #24273aef;
+    color-mantle: #1e2030;
+    color-crust: #181926;
+    color-text: #cad3f5;
+    color-subtext-1: #b8c0e0;
+    color-subtext-0: #a5adcb;
+    color-overlay-2: #939ab7;
+    color-overlay-1: #8087a2;
+    color-overlay-0: #6e738d;
+    color-surface-2: #5b6078;
+    color-surface-1: #494d64;
+    color-surface-0: #363a4f;
+    color-lavender: #b7bdf811;
+
+    color-border: var(color-surface-0);
+
+    background-color: transparent;
+    text-color: var(color-text);
+}
+
+window {
+    width: 800px;
+    border: 1px solid;
+    border-color: var(color-border);
+    border-radius: 8px;
+    background-color: var(color-base-transparent);
+}
+
+mainbox {
+    padding: 0;
+    spacing: 0;
+}
+
+inputbar {
+    spacing: 0;
+    padding: 16px;
+    children: ["prompt", "textbox-prompt-colon", "entry", "num-filtered-rows", "textbox-num-sep", "num-rows"];
+}
+
+prompt {
+    spacing: 0;
+}
+
+entry {
+    cursor: text;
+    spacing: 0;
+    placeholder-color: var(color-overlay-0);
+    placeholder: "Start typing...";
+}
+
+case-indicator {
+    spacing: 0;
+}
+
+textbox-prompt-colon {
+    margin: 0 0.3em 0 0;
+    expand: false;
+    str: ":";
+}
+
+textbox-num-sep {
+    expand: false;
+    str: "/";
+    text-color: var(color-overlay-0);
+}
+
+num-filtered-rows {
+    text-color: var(color-overlay-0);
+}
+
+num-rows {
+    text-color: var(color-overlay-0);
+}
+
+listview {
+    padding: 8px;
+    border-color: var(color-border);
+    border: 1px solid 0 0;
+}
+
+element {
+    padding: 8px;
+    spacing: 8px;
+    border-radius: 8px;
+}
+
+element normal {
+    text-color: var(color-overlay-0);
+}
+
+element selected {
+    background-color: var(color-lavender);
+}
+
+element-text {
+    background-color: transparent;
+    text-color: inherit;
+}
+
+element-icon {
+    size: 1.0em;
+    background-color: transparent;
+}
