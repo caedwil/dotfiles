@@ -1,3 +1,5 @@
 {
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "todo-tree.highlights.highlightDelay": 0,
+  "todo-tree.highlights.useColourScheme": true
 }
