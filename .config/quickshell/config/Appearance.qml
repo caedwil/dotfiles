@@ -21,13 +21,15 @@ Singleton {
 
   property var font: QtObject {
     property var family: QtObject {
-      property string regular: "Fira Code"
+      property string normal: "Fira Code"
       property string symbols: "Material Symbols Rounded"
     }
 
     property var size: QtObject {
-      property int regular: 13
-      property int symbols: 14
+      property int small: 10
+      property int normal: 13
+      property int large: 14
+      property int xlarge: 18
     }
   }
 

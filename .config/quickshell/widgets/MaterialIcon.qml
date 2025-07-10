@@ -4,7 +4,7 @@ import "../config"
 Text {
   id: root
 
-  property int size: Appearance.font.size.symbols
+  property int size: Appearance.font.size.xlarge
   property real fill: 0
 
   renderType: Text.NativeRendering

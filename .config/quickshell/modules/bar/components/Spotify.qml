@@ -42,7 +42,6 @@ Item {
       color: Appearance.color.text
       fill: 1
       visible: root.player
-      size: Appearance.font.size.symbols
 
       MouseArea {
         anchors.fill: parent
@@ -61,7 +60,7 @@ Item {
       }
     }
 
-    TextRegular {
+    TextNormal {
       text: root.player ? root.player?.trackArtist + " // " + root.player?.trackTitle : ""
 
       MouseArea {

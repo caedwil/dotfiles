@@ -33,7 +33,7 @@ Button {
   onPressed: root.workspace.activate()
 
   // TODO: use icons instead.
-  TextRegular {
+  TextNormal {
     text: root.workspace.id
     anchors.centerIn: parent
   }
