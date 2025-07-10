@@ -1,8 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell.Services.SystemTray
-import "../../common"
-import "./components" as Components
+import "../../../config"
 
 Item {
   id: root
@@ -19,7 +18,7 @@ Item {
     Repeater {
       model: SystemTray.items
 
-      Components.SystemTrayItem {
+      TrayItem {
         required property SystemTrayItem modelData
         item: modelData
       }

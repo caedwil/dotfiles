@@ -1,6 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
-import "../../common"
+import "../../../config"
 
 Item {
   property real padding: Appearance.bar.padding

@@ -7,6 +7,8 @@ import Quickshell
 Singleton {
   id: root
 
+  // TODO: convert to components.
+
   property var color: QtObject {
     property color base: "#24273a"
     property color mantle: "#1e2030"

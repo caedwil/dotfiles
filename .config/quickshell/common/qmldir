@@ -1,5 +1,0 @@
-module Common
-singleton Appearance 1.0 Appearance.qml
-Border 1.0 Border.qml
-Icon 1.0 Icon.qml
-TextRegular 1.0 TextRegular.qml

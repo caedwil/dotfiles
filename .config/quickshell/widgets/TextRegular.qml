@@ -1,4 +1,5 @@
 import QtQuick
+import "../config"
 
 Text {
   color: Appearance.color.text

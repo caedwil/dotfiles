@@ -4,7 +4,8 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell.Hyprland
 import Quickshell.Services.Mpris
-import "../../common"
+import "../../../config"
+import "../../../widgets"
 
 Item {
   id: root
@@ -36,7 +37,7 @@ Item {
 
     // TODO: clicking on the widget in the bar should open a full-fledged media player widget!
 
-    Icon {
+    MaterialIcon {
       text: root.player?.isPlaying ? "pause" : "play_arrow"
       color: Appearance.color.text
       fill: 1

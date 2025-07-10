@@ -3,8 +3,7 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
 import Quickshell.Hyprland
-import "../../common"
-import "./components" as Components
+import "../../../config"
 
 Item {
   id: root
@@ -28,9 +27,9 @@ Item {
     }
 
     Repeater {
-      model: Hyprland.workspaces.values.filter(workspace => workspace.monitor.id == monitor.id && !workspace.name.startsWith('special:'))
+      model: Hyprland.workspaces.values.filter(workspace => workspace.monitor?.id == monitor?.id && !workspace.name?.startsWith('special:'))
 
-      Components.WorkspaceButton {
+      Workspace {
         required property var modelData
         workspace: modelData
         monitor: root.monitor

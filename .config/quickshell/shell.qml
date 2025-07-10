@@ -1,11 +1,11 @@
 //@ pragma UseQApplication
 
 import Quickshell
-import "./widgets/bar"
+import "./modules/bar"
 
 ShellRoot {
   LazyLoader {
     active: true
-    component: BarWidget {}
+    component: Bar {}
   }
 }

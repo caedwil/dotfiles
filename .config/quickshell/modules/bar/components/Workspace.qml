@@ -2,7 +2,8 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
 import Quickshell.Hyprland
-import "../../../common"
+import "../../../config"
+import "../../../widgets"
 
 Button {
   id: root
@@ -21,7 +22,7 @@ Button {
     radius: 4
 
     color: {
-      if (root.workspace.id == root.monitor.activeWorkspace.id || root.hovered) {
+      if (root.workspace?.id == root.monitor?.activeWorkspace?.id || root.hovered) {
         return Appearance.color.base;
       }
 

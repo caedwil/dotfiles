@@ -1,7 +1,9 @@
 import Quickshell
 import QtQuick
 import QtQuick.Layouts
-import "../../common"
+import "../../config"
+import "../../widgets"
+import "./components"
 
 Scope {
   Variants {
@@ -51,10 +53,10 @@ Scope {
             margins: Appearance.bar.spacing
           }
 
-          BarGroupWidget {
+          Group {
             padding: Appearance.bar.spacing
 
-            WorkspacesWidget {
+            Workspaces {
               screen: root.screen
             }
           }
@@ -70,16 +72,16 @@ Scope {
             margins: Appearance.bar.spacing
           }
 
-          BarGroupWidget {
-            SpotifyWidget {}
+          Group {
+            Spotify {}
           }
 
-          BarGroupWidget {
-            SystemTrayWidget {}
+          Group {
+            Tray {}
           }
 
-          BarGroupWidget {
-            ClockWidget {}
+          Group {
+            Clock {}
           }
         }
       }
