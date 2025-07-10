@@ -82,6 +82,7 @@ Scope {
 
           Group {
             CPU {}
+            Memory {}
           }
 
           Group {

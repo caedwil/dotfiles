@@ -8,10 +8,16 @@ Singleton {
   id: root
 
   property double cpuUsage: 0
+  property double memoryUsage: 0
 
   FileView {
     id: stat
     path: "/proc/stat"
+  }
+
+  FileView {
+    id: meminfo
+    path: "/proc/meminfo"
   }
 
   Timer {
@@ -20,7 +26,8 @@ Singleton {
     repeat: true
 
     onTriggered: {
-      root.cpuUsage = root.calculateCpuUsage();
+      root.calculateCpuUsage();
+      root.calculateMemoryUsage();
     }
   }
 
@@ -37,6 +44,16 @@ Singleton {
     const total = stats.reduce((result, value) => result + value, 0);
     const idle = stats[3];
 
-    return 1 - (idle / total);
+    root.cpuUsage = 1 - (idle / total);
+  }
+
+  function calculateMemoryUsage() {
+    meminfo.reload();
+
+    const text = meminfo.text();
+    const total = Number(text.match(/MemTotal:\s+(\d+)/)[1] ?? 1);
+    const available = Number(text.match(/MemAvailable:\s+(\d+)/)[1] ?? 0);
+
+    root.memoryUsage = 1 - (available / total);
   }
 }
