@@ -1,2 +1,3 @@
 module Services
 singleton DateTime 1.0 DateTime.qml
+singleton Hardware 1.0 Hardware.qml

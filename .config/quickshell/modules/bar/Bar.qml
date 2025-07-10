@@ -81,6 +81,10 @@ Scope {
           }
 
           Group {
+            CPU {}
+          }
+
+          Group {
             Clock {}
           }
         }
