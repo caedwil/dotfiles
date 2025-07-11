@@ -6,7 +6,7 @@ Item {
   property real padding: Appearance.bar.padding
 
   Layout.fillHeight: true
-  implicitWidth: layout.implicitWidth + (padding * 2)
+  implicitWidth: layout.implicitWidth + (padding * 2) + 2
 
   default property alias items: layout.children
 

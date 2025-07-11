@@ -59,6 +59,14 @@ Scope {
             Workspaces {
               screen: root.screen
             }
+
+            Rectangle {
+              color: Appearance.bar.group.border.color
+              Layout.fillHeight: true
+              implicitWidth: 1
+            }
+
+            SpecialWorkspace {}
           }
         }
 
