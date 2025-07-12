@@ -34,14 +34,14 @@ Item {
       background: Rectangle {
         id: background
 
-        radius: 4
+        radius: 999
 
         color: {
           if (button.hovered) {
-            return Appearance.color.base;
+            return Appearance.color.surface0;
           }
 
-          return 'transparent';
+          return Appearance.color.base;
         }
       }
 
@@ -51,6 +51,7 @@ Item {
         id: text
         text: "?"
         anchors.centerIn: parent
+        opacity: 0.5
       }
 
       MouseArea {
