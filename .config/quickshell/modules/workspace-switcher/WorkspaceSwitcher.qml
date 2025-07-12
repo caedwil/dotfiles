@@ -4,10 +4,10 @@ import QtQuick
 import Qt5Compat.GraphicalEffects
 import QtQuick.Layouts
 import Quickshell
-import Quickshell.Io
 import Quickshell.Hyprland
 import Quickshell.Wayland
 import "../../config"
+import "../../services"
 
 // TODO: Split up into smaller components.
 // TODO: Add a button to the workspace selector in the status bar that opens this?
@@ -49,14 +49,9 @@ Scope {
         active: scope.isOpen && root.monitor.id === Hyprland.focusedMonitor.id
       }
 
-      property var clients: []
-      property var workspaces: []
-
-      property var workspacesForMonitor: []
-
-      onWorkspacesChanged: {
-        root.workspacesForMonitor = root.workspaces.filter(workspace => workspace.monitorID === monitor.id && !workspace.name.startsWith("special:"));
-      }
+      property var clients: HyprlandExtended.clients
+      property var workspaces: HyprlandExtended.workspaces
+      property var workspacesForMonitor: root.workspaces.filter(workspace => workspace.monitorID === monitor.id && !workspace.name.startsWith("special:"))
 
       // TODO: calculate based on monitor width and desired size of items.
       property var columns: 3
@@ -64,40 +59,6 @@ Scope {
 
       onWorkspacesForMonitorChanged: {
         root.rows = Math.ceil(root.workspacesForMonitor.length / columns);
-      }
-
-      // TODO: Would be good to move out into a service.
-      Process {
-        id: getClients
-        command: ["bash", "-c", "hyprctl clients -j | jq -c"]
-        running: true
-        stdout: SplitParser {
-          onRead: data => {
-            root.clients = JSON.parse(data);
-          }
-        }
-      }
-
-      // TODO: Would be good to move out into a service.
-      Process {
-        id: getWorkspaces
-        command: ["bash", "-c", "hyprctl workspaces -j | jq -c"]
-        running: true
-        stdout: SplitParser {
-          onRead: data => {
-            root.workspaces = JSON.parse(data);
-          }
-        }
-      }
-
-      // TODO: Would be good to move out into a service.
-      Connections {
-        target: Hyprland
-
-        function onRawEvent() {
-          getClients.running = true;
-          getWorkspaces.running = true;
-        }
       }
 
       Rectangle {
@@ -142,10 +103,11 @@ Scope {
                 required property var modelData
 
                 // TODO: make this a configurable property.
-                property var padding: 8
+                // TODO: padding is a bit weird on the ultrawide for some reason.
+                property var padding: 0
 
                 // TODO: derive from `hyprctl monitors`.
-                property var reserved: 50
+                property var reserved: 0
 
                 // TODO: derive from desired rows/cols and the monitor dimensions.
                 implicitHeight: 256 + padding
@@ -227,11 +189,11 @@ Scope {
                     property var address: `0x${modelData.HyprlandToplevel.address}`
                     property var client: root.clients.find(client => client.address === address)
 
-                    implicitWidth: client.size[0] / root.monitor.width * (item.implicitWidth - item.padding)
-                    implicitHeight: client.size[1] / (root.monitor.height - item.reserved) * (item.implicitHeight - item.padding)
+                    implicitWidth: client.size[0] / root.monitor.width * (item.implicitWidth - item.padding - 2)
+                    implicitHeight: client.size[1] / (root.monitor.height - item.reserved) * (item.implicitHeight - item.padding - 2)
 
-                    x: (client.at[0] - root.monitor.x + (item.padding * 2)) / root.monitor.width * (item.implicitWidth - item.padding)
-                    y: (client.at[1] - item.reserved + (item.padding * 2)) / (root.monitor.height - item.reserved) * (item.implicitHeight - item.padding)
+                    x: (client.at[0] - root.monitor.x + (item.padding * 2)) / root.monitor.width * (item.implicitWidth - item.padding) + 1
+                    y: (client.at[1] - item.reserved + (item.padding * 2)) / (root.monitor.height - item.reserved) * (item.implicitHeight - item.padding) + 1
 
                     ScreencopyView {
                       live: true
