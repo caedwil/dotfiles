@@ -61,7 +61,7 @@ Item {
     }
 
     TextNormal {
-      text: root.player ? root.player?.trackArtist + " // " + root.player?.trackTitle : ""
+      text: root.player ? root.player?.trackArtist + " - " + root.player?.trackTitle : ""
 
       MouseArea {
         anchors.fill: parent
