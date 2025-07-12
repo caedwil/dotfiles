@@ -67,6 +67,14 @@ Scope {
 
             SpecialWorkspace {}
           }
+
+          Group {
+            decorations: false
+
+            Activity {
+              screen: root.screen
+            }
+          }
         }
 
         RowLayout {

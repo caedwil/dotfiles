@@ -12,15 +12,21 @@ Singleton {
   property var workspaces: []
   property var monitors: []
 
+  function updateAll() {
+    getClients.running = true;
+    getWorkspaces.running = true;
+    getMonitors.running = true;
+  }
+
   Connections {
     target: Hyprland
 
     function onRawEvent() {
-      getClients.running = true;
-      getWorkspaces.running = true;
-      getMonitors.running = true;
+      root.updateAll();
     }
   }
+
+  Component.onCompleted: root.updateAll()
 
   Process {
     id: getClients
@@ -78,6 +84,10 @@ Singleton {
     return root.workspaces.filter(workspace => {
       return workspace.monitorID === monitor.id && !workspace.name.startsWith("special:");
     });
+  }
+
+  function activeWorkspaceForMonitor(monitor) {
+    return root.workspaces.find(workspace => workspace.id === monitor.activeWorkspace.id);
   }
 
   function monitorForScreen(screen) {

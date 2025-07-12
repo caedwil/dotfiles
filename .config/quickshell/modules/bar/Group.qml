@@ -3,7 +3,10 @@ import QtQuick.Layouts
 import "../../config"
 
 Item {
+  id: root
+
   property real padding: Appearance.bar.padding
+  property bool decorations: true
 
   Layout.fillHeight: true
   implicitWidth: layout.implicitWidth + (padding * 2) + 2
@@ -11,6 +14,7 @@ Item {
   default property alias items: layout.children
 
   Rectangle {
+    visible: root.decorations
     color: Appearance.bar.group.color
     border.color: Appearance.bar.group.border.color
     radius: Appearance.bar.group.border.radius
