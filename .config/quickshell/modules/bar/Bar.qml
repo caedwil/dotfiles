@@ -92,6 +92,10 @@ Scope {
           }
 
           Group {
+            Volume {}
+          }
+
+          Group {
             CPU {}
             Memory {}
           }
