@@ -8,8 +8,9 @@ map ctrl+shift+down launch --location=hsplit
 map ctrl+shift+left combine : launch --location=vsplit : move_window left
 map ctrl+shift+right launch --location=vsplit
 
+background_opacity 0.8
 
 # BEGIN_KITTY_THEME
-# Catppuccin-Mocha
+# Tokyo Night
 include current-theme.conf
 # END_KITTY_THEME
