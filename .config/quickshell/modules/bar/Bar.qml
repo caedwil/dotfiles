@@ -3,7 +3,6 @@ import QtQuick
 import QtQuick.Layouts
 import "../../config"
 import "../../widgets"
-import "./components"
 
 Scope {
   Variants {
