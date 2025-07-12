@@ -84,12 +84,12 @@ Scope {
           }
 
           Group {
-            Tray {}
+            CPU {}
+            Memory {}
           }
 
           Group {
-            CPU {}
-            Memory {}
+            Tray {}
           }
 
           Group {
