@@ -60,6 +60,10 @@ Singleton {
   }
 
   function clientsForWorkspaceByClass(workspace) {
+    if (!workspace) {
+      return [];
+    }
+
     const clients = {};
 
     for (const client of root.clients) {
@@ -81,16 +85,28 @@ Singleton {
   }
 
   function workspacesForMonitor(monitor) {
+    if (!monitor) {
+      return [];
+    }
+
     return root.workspaces.filter(workspace => {
       return workspace.monitorID === monitor.id && !workspace.name.startsWith("special:");
     });
   }
 
   function activeWorkspaceForMonitor(monitor) {
+    if (!monitor) {
+      return;
+    }
+
     return root.workspaces.find(workspace => workspace.id === monitor.activeWorkspace.id);
   }
 
   function monitorForScreen(screen) {
+    if (!screen) {
+      return;
+    }
+
     return root.monitors.find(monitor => monitor.name === screen.name);
   }
 }
