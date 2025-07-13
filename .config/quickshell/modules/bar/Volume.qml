@@ -8,7 +8,7 @@ Item {
   id: root
 
   property PwNode sink: Pipewire.defaultAudioSink
-  property real volume: (sink.audio.volume * 100.0).toFixed(0)
+  property real volume: ((sink?.audio.volume ?? 0) * 100.0).toFixed(0)
 
   Layout.fillHeight: true
   implicitWidth: layout.implicitWidth + Appearance.bar.padding
@@ -26,7 +26,7 @@ Item {
     }
 
     MaterialIcon {
-      text: !root.sink.audio.muted ? "volume_up" : "volume_off"
+      text: !root.sink?.audio.muted ? "volume_up" : "volume_off"
       color: Appearance.color.text
       fill: 1
     }
