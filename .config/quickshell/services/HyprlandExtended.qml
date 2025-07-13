@@ -30,28 +30,28 @@ Singleton {
 
   Process {
     id: getClients
-    command: ["bash", "-c", "hyprctl clients -j | jq -c"]
+    command: ["hyprctl", "clients", "-j"]
     running: true
-    stdout: SplitParser {
-      onRead: data => root.clients = JSON.parse(data)
+    stdout: StdioCollector {
+      onStreamFinished: root.clients = JSON.parse(data)
     }
   }
 
   Process {
     id: getWorkspaces
-    command: ["bash", "-c", "hyprctl workspaces -j | jq -c"]
+    command: ["hyprctl", "workspaces", "-j"]
     running: true
-    stdout: SplitParser {
-      onRead: data => root.workspaces = JSON.parse(data)
+    stdout: StdioCollector {
+      onStreamFinished: root.workspaces = JSON.parse(data)
     }
   }
 
   Process {
     id: getMonitors
-    command: ["bash", "-c", "hyprctl monitors -j | jq -c"]
+    command: ["hyprctl", "monitors", "-j"]
     running: true
-    stdout: SplitParser {
-      onRead: data => root.monitors = JSON.parse(data)
+    stdout: StdioCollector {
+      onStreamFinished: root.monitors = JSON.parse(data)
     }
   }
 
