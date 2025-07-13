@@ -3,6 +3,7 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
+import Quickshell
 import Quickshell.Hyprland
 import "../../config"
 import "../../services"
@@ -11,10 +12,10 @@ import "../../widgets"
 Button {
   id: root
 
-  required property HyprlandWorkspace workspace
-  required property HyprlandMonitor monitor
+  required property var workspace
+  property HyprlandMonitor monitor
   property var clients: HyprlandExtended.clientsForWorkspaceByClass(workspace)
-  property var hasClients: clients.length > 0
+  property bool hasClients: clients.length > 0
 
   Layout.fillHeight: true
   implicitWidth: root.hasClients ? layout.implicitWidth : height
@@ -35,7 +36,14 @@ Button {
     }
   }
 
-  onPressed: root.workspace.activate()
+  onPressed: {
+    if (workspace.name.startsWith('special:')) {
+      Hyprland.dispatch(`togglespecialworkspace ${workspace.name.substring('special:'.length)}`);
+      return;
+    }
+
+    Hyprland.dispatch(`workspace ${workspace.id}`);
+  }
 
   TextNormal {
     visible: !root.hasClients
@@ -48,24 +56,36 @@ Button {
     id: layout
 
     spacing: 0
-
-    anchors {
-      top: parent.top
-      bottom: parent.bottom
-    }
+    anchors.fill: parent
 
     Repeater {
       model: root.clients
 
       Item {
         id: client
+
+        required property var index
         required property var modelData
+        property var desktopEntry: DesktopEntries.byId(modelData.class)
 
         Layout.fillHeight: true
         implicitWidth: height
 
+        Layout.alignment: Qt.AlignLeft
+        Layout.leftMargin: index == 0 ? 0 : -6
+
+        Image {
+          id: icon
+          visible: client.desktopEntry
+          source: Quickshell.iconPath(client.desktopEntry?.icon)
+          anchors.centerIn: parent
+          height: parent.height - 12
+          width: parent.width - 12
+          smooth: true
+        }
+
         TextNormal {
-          // TODO: replace with the application's icon.
+          visible: !client.desktopEntry
           text: client.modelData.class[0].toLowerCase()
           anchors.centerIn: parent
         }

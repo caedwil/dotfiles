@@ -2,14 +2,13 @@ pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQuick.Layouts
-import Quickshell.Hyprland
 import "../../config"
+import "../../services"
 
 Item {
   id: root
 
-  required property var screen
-  property HyprlandMonitor monitor: Hyprland.monitorFor(screen)
+  required property var monitor
 
   Layout.fillHeight: true
   implicitWidth: layout.implicitWidth
@@ -27,7 +26,7 @@ Item {
     }
 
     Repeater {
-      model: Hyprland.workspaces.values.filter(workspace => workspace.monitor?.id == monitor?.id && !workspace.name?.startsWith('special:'))
+      model: HyprlandExtended.workspacesForMonitor(root.monitor)
 
       Workspace {
         required property var modelData

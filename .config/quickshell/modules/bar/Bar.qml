@@ -1,6 +1,7 @@
-import Quickshell
 import QtQuick
 import QtQuick.Layouts
+import Quickshell
+import Quickshell.Hyprland
 import "../../config"
 import "../../widgets"
 
@@ -13,6 +14,8 @@ Scope {
 
       property var modelData
       screen: modelData
+
+      property var monitor: Hyprland.monitorFor(screen)
 
       anchors.top: true
       anchors.left: true
@@ -56,7 +59,7 @@ Scope {
             padding: Appearance.bar.spacing
 
             Workspaces {
-              screen: root.screen
+              monitor: root.monitor
             }
 
             Rectangle {
