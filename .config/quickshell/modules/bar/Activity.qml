@@ -3,7 +3,6 @@ import QtQuick.Layouts
 import "../../services"
 import "../../widgets"
 
-// TODO: maximum width.
 Item {
   id: root
 
@@ -12,11 +11,17 @@ Item {
   property var activeWorkspace: HyprlandExtended.activeWorkspaceForMonitor(monitor)
 
   Layout.fillHeight: true
-  implicitWidth: text.implicitWidth
+  Layout.maximumWidth: 400
+  implicitWidth: layout.implicitWidth
 
-  TextNormal {
-    id: text
-    text: root.activeWorkspace?.lastwindowtitle ?? ""
-    anchors.centerIn: parent
+  RowLayout {
+    id: layout
+    anchors.fill: parent
+
+    TextNormal {
+      text: root.activeWorkspace?.lastwindowtitle ?? ""
+      elide: Text.ElideRight
+      Layout.fillWidth: true
+    }
   }
 }
