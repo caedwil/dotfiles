@@ -38,8 +38,6 @@ Item {
     anchors.leftMargin: Appearance.bar.padding
     anchors.rightMargin: Appearance.bar.padding
 
-    // TODO: clicking on the widget in the bar should open a full-fledged media player widget!
-
     MaterialIcon {
       text: root.player?.isPlaying ? "pause" : "play_arrow"
       color: Appearance.color.text
@@ -72,16 +70,16 @@ Item {
         anchors.fill: parent
         acceptedButtons: Qt.LeftButton
         cursorShape: Qt.PointingHandCursor
-        visible: !root.player
 
         onClicked: event => {
           event.accepted = true;
 
-          if (event.button != Qt.LeftButton || root.player) {
+          if (!root.player) {
+            Hyprland.dispatch("exec spotify-launcher");
             return;
           }
 
-          Hyprland.dispatch("exec spotify-launcher");
+          Hyprland.dispatch("global quickshell:player-spotify-toggle");
         }
       }
     }
