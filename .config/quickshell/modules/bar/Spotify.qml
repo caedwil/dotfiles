@@ -27,13 +27,16 @@ Item {
   }
 
   Layout.fillHeight: true
+  Layout.maximumWidth: 400
   implicitWidth: layout.implicitWidth + (Appearance.bar.padding * 2)
 
   RowLayout {
     id: layout
 
     spacing: Appearance.bar.tray.spacing
-    anchors.centerIn: parent
+    anchors.fill: parent
+    anchors.leftMargin: Appearance.bar.padding
+    anchors.rightMargin: Appearance.bar.padding
 
     // TODO: clicking on the widget in the bar should open a full-fledged media player widget!
 
@@ -62,6 +65,8 @@ Item {
 
     TextNormal {
       text: root.player ? root.player?.trackArtist + " - " + root.player?.trackTitle : ""
+      elide: Text.ElideRight
+      Layout.fillWidth: true
 
       MouseArea {
         anchors.fill: parent
