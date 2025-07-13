@@ -14,7 +14,7 @@ Item {
   implicitWidth: layout.implicitWidth + Appearance.bar.padding
 
   PwObjectTracker {
-    objects: [sink]
+    objects: [root.sink]
   }
 
   RowLayout {
