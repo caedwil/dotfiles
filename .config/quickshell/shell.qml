@@ -2,7 +2,7 @@
 
 import Quickshell
 import "./modules/bar"
-import "./modules/workspace-switcher"
+import "./modules/workspace_switcher"
 
 ShellRoot {
   LazyLoader {
