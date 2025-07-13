@@ -26,7 +26,21 @@ Item {
     }
 
     MaterialIcon {
-      text: !root.sink?.audio.muted ? "volume_up" : "volume_off"
+      text: {
+        if (root.sink?.audio.muted) {
+          return "volume_off";
+        }
+
+        if (root.volume == 0) {
+          return "volume_mute";
+        }
+
+        if (root.volume <= 50) {
+          return "volume_down";
+        }
+
+        return "volume_up";
+      }
       color: Appearance.color.text
       fill: 1
     }
