@@ -5,12 +5,11 @@ import QtQuick.Effects
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Services.Mpris
+import Quickshell.Wayland
 import "./components"
 import "../../config"
 import "../../widgets"
 
-// TODO: To set the position, have the Spotify bar component "broadcast" its
-//       position so that we can use it.
 PanelWindow { // qmllint disable
   id: root
 
@@ -22,9 +21,8 @@ PanelWindow { // qmllint disable
   implicitWidth: player.implicitWidth
 
   anchors.top: true
-  anchors.right: true
 
-  margins.top: -9
+  WlrLayershell.layer: WlrLayer.Overlay
 
   mask: Region {
     item: player
@@ -66,8 +64,7 @@ PanelWindow { // qmllint disable
       anchors.centerIn: parent
       color: Appearance.color.base
       border.color: Appearance.color.crust
-      bottomLeftRadius: 8
-      bottomRightRadius: 8
+      radius: 8
     }
 
     MultiEffect {
