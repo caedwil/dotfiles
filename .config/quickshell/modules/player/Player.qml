@@ -32,8 +32,14 @@ PanelWindow { // qmllint disable
 
   Item {
     id: player
-    implicitHeight: layout.implicitHeight + 40
+    implicitHeight: root.visible ? layout.implicitHeight + 40 : 0
     implicitWidth: 512
+
+    Behavior on implicitHeight {
+      NumberAnimation {
+        duration: 50
+      }
+    }
 
     property MprisPlayer player: null
 

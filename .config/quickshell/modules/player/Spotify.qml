@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import Quickshell
 import Quickshell.Hyprland
@@ -18,6 +20,7 @@ Scope {
     active: false
     Player {
       name: "Spotify"
+      visible: loader.active
     }
   }
 }
