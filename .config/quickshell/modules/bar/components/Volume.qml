@@ -1,8 +1,8 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell.Services.Pipewire
-import "../../config"
-import "../../widgets"
+import "../../../config"
+import "../../../widgets"
 
 Item {
   id: root

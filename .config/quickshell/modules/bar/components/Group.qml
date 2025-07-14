@@ -1,6 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
-import "../../config"
+import "../../../config"
 
 Item {
   id: root

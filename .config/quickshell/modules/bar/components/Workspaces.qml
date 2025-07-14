@@ -2,8 +2,8 @@ pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQuick.Layouts
-import "../../config"
-import "../../services"
+import "../../../config"
+import "../../../services"
 
 Item {
   id: root
