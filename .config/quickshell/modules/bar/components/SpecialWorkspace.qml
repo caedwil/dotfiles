@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
+import Quickshell.Hyprland
 import "../../../config"
 import "../../../services"
 
@@ -14,5 +15,6 @@ Item {
     id: workspace
     anchors.fill: parent
     workspace: HyprlandExtended.workspaces.find(workspace => workspace.name == "special:special")
+    onPressed: Hyprland.dispatch(`togglespecialworkspace special`)
   }
 }

@@ -25,24 +25,19 @@ Button {
   background: Rectangle {
     id: background
 
-    radius: 999
+    radius: Appearance.radius.full
 
     color: {
-      if (root.workspace?.id == root.monitor?.activeWorkspace?.id || root.hovered) {
+      if (root.hovered) {
+        return Appearance.color.surface0;
+      }
+
+      if (root.monitor && root.monitor.activeWorkspace.id == root.workspace?.id) {
         return Appearance.color.surface0;
       }
 
       return Appearance.color.base;
     }
-  }
-
-  onPressed: {
-    if (workspace.name.startsWith('special:')) {
-      Hyprland.dispatch(`togglespecialworkspace ${workspace.name.substring('special:'.length)}`);
-      return;
-    }
-
-    Hyprland.dispatch(`workspace ${workspace.id}`);
   }
 
   TextNormal {

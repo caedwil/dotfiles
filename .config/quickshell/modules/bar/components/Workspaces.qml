@@ -2,6 +2,7 @@ pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQuick.Layouts
+import Quickshell.Hyprland
 import "../../../config"
 import "../../../services"
 
@@ -32,6 +33,7 @@ Item {
         required property var modelData
         workspace: modelData
         monitor: root.monitor
+        onPressed: Hyprland.dispatch(`workspace ${workspace.id}`)
       }
     }
   }
