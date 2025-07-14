@@ -1,18 +1,30 @@
 pragma ComponentBehavior: Bound
 
-import QtQuick
 import Quickshell
 import Quickshell.Hyprland
 
 Scope {
   id: scope
 
-  // TODO: if triggered by clicking on the component in the status bar, position
-  // relative to the component. However, if triggered any other way (like by a
-  // key bind), position centered.
+  property bool useRelativePosition: false
+  property HyprlandMonitor monitor
+
   GlobalShortcut {
     name: "player-spotify-toggle"
-    onPressed: loader.active = !loader.active
+    onPressed: {
+      scope.useRelativePosition = false;
+      scope.monitor = Hyprland.focusedMonitor;
+      loader.active = !loader.active;
+    }
+  }
+
+  GlobalShortcut {
+    name: "player-spotify-toggle-relative-to-status-bar"
+    onPressed: {
+      scope.useRelativePosition = true;
+      scope.monitor = Hyprland.focusedMonitor;
+      loader.active = !loader.active;
+    }
   }
 
   LazyLoader {
@@ -21,6 +33,8 @@ Scope {
     Player {
       name: "Spotify"
       visible: loader.active
+      useRelativePosition: scope.useRelativePosition
+      monitor: scope.monitor
     }
   }
 }

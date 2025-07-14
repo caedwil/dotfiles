@@ -4,6 +4,7 @@ import Quickshell
 import Quickshell.Hyprland
 import "./components"
 import "../../config"
+import "../../services"
 import "../../widgets"
 
 Scope {
@@ -92,7 +93,13 @@ Scope {
           }
 
           Group {
-            Spotify {}
+            Spotify {
+              id: spotify
+            }
+          }
+
+          onXChanged: {
+            Position.setPlayerX(root.monitor, x - (spotify.width / 4));
           }
 
           Group {

@@ -4,16 +4,20 @@ import QtQuick
 import QtQuick.Effects
 import QtQuick.Layouts
 import Quickshell
+import Quickshell.Hyprland
 import Quickshell.Services.Mpris
 import Quickshell.Wayland
 import "./components"
 import "../../config"
+import "../../services"
 import "../../widgets"
 
 PanelWindow { // qmllint disable
   id: root
 
   required property string name
+  property bool useRelativePosition: false
+  property HyprlandMonitor monitor
 
   color: "transparent"
 
@@ -21,6 +25,10 @@ PanelWindow { // qmllint disable
   implicitWidth: player.implicitWidth
 
   anchors.top: true
+  margins.top: useRelativePosition ? -9 : 0
+
+  anchors.left: useRelativePosition
+  margins.left: useRelativePosition ? Position.playerX[monitor.id] : 0
 
   WlrLayershell.layer: WlrLayer.Overlay
 
@@ -70,7 +78,10 @@ PanelWindow { // qmllint disable
       anchors.centerIn: parent
       color: Appearance.color.base
       border.color: Appearance.color.crust
-      radius: 8
+      topLeftRadius: root.useRelativePosition ? 0 : 8
+      topRightRadius: root.useRelativePosition ? 0 : 8
+      bottomLeftRadius: 8
+      bottomRightRadius: 8
     }
 
     MultiEffect {

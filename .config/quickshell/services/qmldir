@@ -2,3 +2,4 @@ module Services
 singleton DateTime 1.0 DateTime.qml
 singleton Hardware 1.0 Hardware.qml
 singleton HyprlandExtended 1.0 HyprlandExtended.qml
+singleton Position 1.0 Position.qml

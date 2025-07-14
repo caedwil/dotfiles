@@ -27,8 +27,7 @@ Item {
   }
 
   Layout.fillHeight: true
-  Layout.maximumWidth: 400
-  implicitWidth: layout.implicitWidth + (Appearance.bar.padding * 2)
+  implicitWidth: (root.player ? 320 : layout.implicitWidth) + (Appearance.bar.padding * 2)
 
   RowLayout {
     id: layout
@@ -79,7 +78,7 @@ Item {
             return;
           }
 
-          Hyprland.dispatch("global quickshell:player-spotify-toggle");
+          Hyprland.dispatch("global quickshell:player-spotify-toggle-relative-to-status-bar");
         }
       }
     }
