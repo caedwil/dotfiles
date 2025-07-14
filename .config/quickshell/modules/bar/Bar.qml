@@ -99,6 +99,7 @@ Scope {
           }
 
           onXChanged: {
+            // TODO: This only works while the player is the first item in the layout.
             Position.setPlayerX(root.monitor, x - (spotify.width / 4));
           }
 
