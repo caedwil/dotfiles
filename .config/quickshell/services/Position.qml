@@ -7,7 +7,6 @@ Singleton {
 
   function setPlayerX(monitor, x) {
     playerX[monitor.id] = x;
-    console.log(playerX[monitor.id]);
   }
 
   function getPlayerX(monitor) {
