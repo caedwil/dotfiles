@@ -11,6 +11,9 @@ Singleton {
   property double memoryUsage: 0
   property double uptimeInSeconds: 0
 
+  property string username
+  property string hostname
+
   FileView {
     id: stat
     path: "/proc/stat"
@@ -35,6 +38,22 @@ Singleton {
       root.calculateCpuUsage();
       root.calculateMemoryUsage();
       root.calculateUptimeInSeconds();
+    }
+  }
+
+  Process {
+    command: ["whoami"]
+    running: true
+    stdout: StdioCollector {
+      onStreamFinished: root.username = data.toString().trim()
+    }
+  }
+
+  Process {
+    command: ["hostnamectl", "hostname"]
+    running: true
+    stdout: StdioCollector {
+      onStreamFinished: root.hostname = data.toString().trim()
     }
   }
 
