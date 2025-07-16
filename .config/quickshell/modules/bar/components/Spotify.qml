@@ -78,7 +78,7 @@ Item {
             return;
           }
 
-          Hyprland.dispatch("global quickshell:player-spotify-toggle-relative-to-status-bar");
+          Hyprland.dispatch("global quickshell:player-spotify-toggle-anchor-to-bar");
         }
       }
     }

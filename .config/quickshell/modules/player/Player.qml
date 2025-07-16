@@ -1,153 +1,82 @@
 pragma ComponentBehavior: Bound
 
 import QtQuick
-import QtQuick.Effects
 import QtQuick.Layouts
-import Quickshell
-import Quickshell.Hyprland
 import Quickshell.Services.Mpris
-import Quickshell.Wayland
 import "./components"
 import "../../config"
-import "../../services"
 import "../../widgets"
 
-PanelWindow { // qmllint disable
+ColumnLayout {
   id: root
 
   required property string name
-  property bool useRelativePosition: false
-  property HyprlandMonitor monitor
+  property MprisPlayer player: null
 
-  color: "transparent"
+  Instantiator {
+    model: Mpris.players
 
-  implicitHeight: player.implicitHeight
-  implicitWidth: player.implicitWidth
+    Connections {
+      required property MprisPlayer modelData
+      target: modelData
 
-  anchors.top: true
-  margins.top: useRelativePosition ? -9 : 0
-
-  anchors.left: useRelativePosition
-  margins.left: useRelativePosition ? Position.playerX[monitor.id] : 0
-
-  WlrLayershell.layer: WlrLayer.Overlay
-
-  mask: Region {
-    item: player
-  }
-
-  exclusionMode: ExclusionMode.Normal
-
-  Item {
-    id: player
-    implicitHeight: root.visible ? layout.implicitHeight + 40 : 0
-    implicitWidth: 512
-
-    Behavior on implicitHeight {
-      NumberAnimation {
-        duration: 50
-      }
-    }
-
-    property MprisPlayer player: null
-
-    Instantiator {
-      model: Mpris.players
-
-      Connections {
-        required property MprisPlayer modelData
-        target: modelData
-
-        Component.onCompleted: {
-          if (modelData.identity == root.name) {
-            player.player = target;
-          }
+      Component.onCompleted: {
+        if (modelData.identity == root.name) {
+          root.player = target;
         }
       }
     }
+  }
 
-    FrameAnimation {
-      running: player.player?.playbackState == MprisPlaybackState.Playing
-      onTriggered: player.player.positionChanged()
-    }
+  FrameAnimation {
+    running: root.player?.playbackState == MprisPlaybackState.Playing
+    onTriggered: root.player.positionChanged()
+  }
 
-    Rectangle {
-      id: background
-      implicitHeight: player.implicitHeight - 16
-      implicitWidth: player.implicitWidth - 16
-      anchors.centerIn: parent
-      color: Appearance.color.base
-      border.color: Appearance.color.crust
-      topLeftRadius: root.useRelativePosition ? 0 : 8
-      topRightRadius: root.useRelativePosition ? 0 : 8
-      bottomLeftRadius: 8
-      bottomRightRadius: 8
-    }
+  spacing: 12
 
-    MultiEffect {
-      source: background
-      anchors.fill: background
-      shadowEnabled: true
-      shadowBlur: 0.4
-      shadowColor: Appearance.color.crust
-      shadowVerticalOffset: 0
-      shadowHorizontalOffset: 0
+  RowLayout {
+    spacing: 8
+
+    AlbumArtwork {
+      id: artwork
+      player: root.player
     }
 
     ColumnLayout {
-      id: layout
-
-      anchors.top: parent.top
-      anchors.left: parent.left
-      anchors.right: parent.right
-      anchors.margins: 20
-
-      spacing: 12
-
-      RowLayout {
-        spacing: 8
-
-        AlbumArtwork {
-          id: artwork
-          player: player.player
-        }
-
-        ColumnLayout {
-          TextLarge {
-            text: player.player?.trackTitle
-            elide: Text.ElideRight
-            font.bold: true
-            Layout.maximumWidth: player.width - controls.width - artwork.width - 40 - 24
-          }
-
-          TextNormal {
-            text: player.player?.trackArtist
-            elide: Text.ElideRight
-            Layout.maximumWidth: player.width - controls.width - artwork.width - 40 - 24
-          }
-        }
-
-        HorizontalSpacer {}
-
-        Controls {
-          id: controls
-          player: player.player
-          Layout.alignment: Qt.AlignHCenter
-        }
+      TextLarge {
+        text: root.player?.trackTitle
+        elide: Text.ElideRight
+        font.bold: true
+        Layout.maximumWidth: root.width - controls.width - artwork.width - 40 - 24
       }
 
-      Rectangle {
-        color: Appearance.color.crust
-        implicitHeight: 1
-        Layout.fillWidth: true
-
-        Layout.leftMargin: -12
-        Layout.rightMargin: -12
-      }
-
-      ProgressBar {
-        player: player.player
+      TextNormal {
+        text: root.player?.trackArtist
+        elide: Text.ElideRight
+        Layout.maximumWidth: root.width - controls.width - artwork.width - 40 - 24
       }
     }
+
+    HorizontalSpacer {}
+
+    Controls {
+      id: controls
+      player: root.player
+      Layout.alignment: Qt.AlignHCenter
+    }
+  }
+
+  Rectangle {
+    color: Appearance.color.crust
+    implicitHeight: 1
+    Layout.fillWidth: true
+
+    Layout.leftMargin: -12
+    Layout.rightMargin: -12
+  }
+
+  ProgressBar {
+    player: root.player
   }
 }

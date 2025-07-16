@@ -2,39 +2,53 @@ pragma ComponentBehavior: Bound
 
 import Quickshell
 import Quickshell.Hyprland
+import "../../services"
+import "../../widgets"
 
 Scope {
   id: scope
 
-  property bool useRelativePosition: false
-  property HyprlandMonitor monitor
+  property bool anchorToBar: false
+  property HyprlandMonitor monitor: Hyprland.focusedMonitor
 
+  // TODO: This could be a floating window instead. Would need corresponding
+  // windowrules in Hyprland config - no decorations, floating. Alternatively,
+  // could allow for the "floating" PanelWindow to be moved by dragging it?
   GlobalShortcut {
     name: "player-spotify-toggle"
     onPressed: {
-      scope.useRelativePosition = false;
-      scope.monitor = Hyprland.focusedMonitor;
       loader.active = !loader.active;
+      scope.anchorToBar = false;
     }
   }
 
   GlobalShortcut {
-    name: "player-spotify-toggle-relative-to-status-bar"
+    name: "player-spotify-toggle-anchor-to-bar"
     onPressed: {
-      scope.useRelativePosition = true;
-      scope.monitor = Hyprland.focusedMonitor;
       loader.active = !loader.active;
+      scope.anchorToBar = true;
     }
   }
 
   LazyLoader {
     id: loader
     active: false
-    Player {
-      name: "Spotify"
-      visible: loader.active
-      useRelativePosition: scope.useRelativePosition
-      monitor: scope.monitor
+
+    ModuleWindow {
+      id: window
+
+      anchors.top: true
+      margins.top: scope.anchorToBar ? -(HyprlandExtended.gapsOut[0] + 1) : 16
+
+      anchors.left: scope.anchorToBar
+      margins.left: scope.anchorToBar ? Position.playerX[scope.monitor.id] : 0
+
+      topLeftRadius: scope.anchorToBar ? 0 : 8
+      topRightRadius: scope.anchorToBar ? 0 : 8
+
+      Player {
+        name: "Spotify"
+      }
     }
   }
 }

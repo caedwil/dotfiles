@@ -11,11 +11,13 @@ Singleton {
   property var clients: []
   property var workspaces: []
   property var monitors: []
+  property var gapsOut: [0, 0, 0, 0]
 
   function updateAll() {
     getClients.running = true;
     getWorkspaces.running = true;
     getMonitors.running = true;
+    getGapsOut.running = true;
   }
 
   Connections {
@@ -52,6 +54,15 @@ Singleton {
     running: true
     stdout: StdioCollector {
       onStreamFinished: root.monitors = JSON.parse(data)
+    }
+  }
+
+  Process {
+    id: getGapsOut
+    command: ["hyprctl", "getoption", "general:gaps_out", "-j"]
+    running: true
+    stdout: StdioCollector {
+      onStreamFinished: root.gapsOut = JSON.parse(data).custom.split(" ").map(gap => Number(gap))
     }
   }
 
