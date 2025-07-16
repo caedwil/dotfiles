@@ -5,26 +5,12 @@ import QtQuick.Layouts
 import Quickshell.Hyprland
 import Quickshell.Services.Mpris
 import "../../../config"
+import "../../../services"
 import "../../../widgets"
 
 Item {
   id: root
-  property MprisPlayer player: null
-
-  Instantiator {
-    model: Mpris.players
-
-    Connections {
-      required property MprisPlayer modelData
-      target: modelData
-
-      Component.onCompleted: {
-        if (modelData.identity == "Spotify") {
-          root.player = target;
-        }
-      }
-    }
-  }
+  property MprisPlayer player: MprisController.getPlayerByName("Spotify")
 
   Layout.fillHeight: true
   implicitWidth: (root.player ? 320 : layout.implicitWidth) + (Appearance.bar.padding * 2)

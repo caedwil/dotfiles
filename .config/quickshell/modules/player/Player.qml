@@ -3,6 +3,7 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
 import Quickshell.Services.Mpris
+import qs.services
 import "./components"
 import "../../config"
 import "../../widgets"
@@ -11,22 +12,7 @@ ColumnLayout {
   id: root
 
   required property string name
-  property MprisPlayer player: null
-
-  Instantiator {
-    model: Mpris.players
-
-    Connections {
-      required property MprisPlayer modelData
-      target: modelData
-
-      Component.onCompleted: {
-        if (modelData.identity == root.name) {
-          root.player = target;
-        }
-      }
-    }
-  }
+  property MprisPlayer player: MprisController.getPlayerByName(name)
 
   FrameAnimation {
     running: root.player?.playbackState == MprisPlaybackState.Playing
