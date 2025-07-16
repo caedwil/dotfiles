@@ -1,8 +1,9 @@
 //@ pragma UseQApplication
 
 import Quickshell
-import "./modules/bar"
-import "./modules/player"
+import qs.modules.bar
+import qs.modules.dashboard as Dashboard
+import qs.modules.player
 
 ShellRoot {
   LazyLoader {
@@ -14,4 +15,6 @@ ShellRoot {
     active: true
     component: Spotify {}
   }
+
+  Dashboard.Window {}
 }

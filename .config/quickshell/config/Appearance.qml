@@ -8,6 +8,8 @@ Singleton {
   id: root
 
   // TODO: convert to components.
+  // TODO: fix up all the colours - replace all the hard-coded colours.
+  // TODO: get rid of the bar property.
 
   property var color: QtObject {
     property color base: "#24273a"

@@ -3,9 +3,9 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Hyprland
 import "./components"
-import "../../config"
-import "../../services"
-import "../../widgets"
+import qs.config
+import qs.services
+import qs.widgets
 
 Scope {
   Variants {
@@ -108,16 +108,16 @@ Scope {
           }
 
           Group {
-            CPU {}
-            Memory {}
-          }
-
-          Group {
             Tray {}
           }
 
           Group {
             Clock {}
+          }
+
+          Group {
+            decorations: false
+            DashboardButton {}
           }
         }
       }
