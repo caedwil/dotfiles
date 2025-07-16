@@ -61,7 +61,30 @@ Button {
 
         required property var index
         required property var modelData
-        property var desktopEntry: DesktopEntries.byId(modelData.class)
+
+        property var desktopEntry: {
+          const id = modelData.class.toLowerCase();
+
+          const overrides = {
+            spotify: "spotify-launcher"
+          };
+
+          for (const application of DesktopEntries.applications.values) {
+            const appId = application.id.toLowerCase();
+
+            if (appId == id) {
+              return application;
+            }
+
+            if (appId == overrides[id]) {
+              return application;
+            }
+
+            if (appId.startsWith('appimagekit_') && appId.endsWith(id)) {
+              return application;
+            }
+          }
+        }
 
         Layout.fillHeight: true
         implicitWidth: height
