@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell.Services.Mpris
 import Quickshell.Widgets
-import "../../../common/format.js" as Format
+import "../../../common/prettify.js" as Prettify
 import "../../../common/math.js" as MathExtended
 import "../../../config"
 import "../../../widgets"
@@ -22,7 +22,9 @@ Item {
     anchors.fill: parent
 
     TextNormal {
-      text: Format.seconds(root.player.position)
+      text: Prettify.seconds(root.player.position, {
+        condensed: true
+      })
     }
 
     ClippingRectangle {
@@ -83,7 +85,9 @@ Item {
     }
 
     TextNormal {
-      text: Format.seconds(root.player.length)
+      text: Prettify.seconds(root.player.length, {
+        condensed: true
+      })
     }
   }
 }
