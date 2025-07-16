@@ -19,7 +19,7 @@ Item {
 
     TextNormal {
       text: {
-        const cpu = Math.round(Hardware.cpuUsage * 100);
+        const cpu = Math.round(SystemInfo.cpuUsage * 100);
         return `${cpu}%`;
       }
     }

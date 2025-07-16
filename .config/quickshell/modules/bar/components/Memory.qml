@@ -19,7 +19,7 @@ Item {
 
     TextNormal {
       text: {
-        const memoryUsage = Math.round(Hardware.memoryUsage * 100);
+        const memoryUsage = Math.round(SystemInfo.memoryUsage * 100);
         return `${memoryUsage}%`;
       }
     }

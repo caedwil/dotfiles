@@ -9,6 +9,7 @@ Singleton {
 
   property double cpuUsage: 0
   property double memoryUsage: 0
+  property double uptimeInSeconds: 0
 
   FileView {
     id: stat
@@ -20,6 +21,11 @@ Singleton {
     path: "/proc/meminfo"
   }
 
+  FileView {
+    id: uptime
+    path: "/proc/uptime"
+  }
+
   Timer {
     interval: 1000
     running: true
@@ -28,6 +34,7 @@ Singleton {
     onTriggered: {
       root.calculateCpuUsage();
       root.calculateMemoryUsage();
+      root.calculateUptimeInSeconds();
     }
   }
 
@@ -55,5 +62,17 @@ Singleton {
     const available = Number(text.match(/MemAvailable:\s+(\d+)/)[1] ?? 0);
 
     root.memoryUsage = 1 - (available / total);
+  }
+
+  function calculateUptimeInSeconds() {
+    uptime.reload();
+
+    const [value] = uptime.text().split(" ");
+
+    if (!value) {
+      return;
+    }
+
+    uptimeInSeconds = Number(value);
   }
 }
