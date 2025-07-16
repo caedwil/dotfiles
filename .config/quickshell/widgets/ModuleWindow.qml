@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Effects
 import Quickshell
 import Quickshell.Wayland
-import "../config"
+import qs.config
 
 PanelWindow { // qmllint disable
   id: window

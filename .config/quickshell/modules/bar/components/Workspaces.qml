@@ -3,8 +3,8 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
 import Quickshell.Hyprland
-import "../../../config"
-import "../../../services"
+import qs.config
+import qs.services
 
 Item {
   id: root

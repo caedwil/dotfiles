@@ -4,9 +4,9 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell.Hyprland
 import Quickshell.Services.Mpris
-import "../../../config"
-import "../../../services"
-import "../../../widgets"
+import qs.config
+import qs.services
+import qs.widgets
 
 Item {
   id: root

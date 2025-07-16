@@ -1,7 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell.Services.SystemTray
-import "../../../config"
+import qs.config
 
 Item {
   id: root

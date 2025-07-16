@@ -1,7 +1,7 @@
 import QtQuick
 import Quickshell.Services.Mpris
 import Quickshell.Widgets
-import "../../../config"
+import qs.config
 
 ClippingWrapperRectangle {
   id: root

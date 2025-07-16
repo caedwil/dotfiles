@@ -2,8 +2,8 @@ pragma ComponentBehavior: Bound
 
 import Quickshell
 import Quickshell.Hyprland
-import "../../services"
-import "../../widgets"
+import qs.services
+import qs.widgets
 
 Scope {
   id: scope

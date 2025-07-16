@@ -5,8 +5,8 @@ import QtQuick.Layouts
 import Quickshell.Services.Mpris
 import qs.services
 import "./components"
-import "../../config"
-import "../../widgets"
+import qs.config
+import qs.widgets
 
 ColumnLayout {
   id: root

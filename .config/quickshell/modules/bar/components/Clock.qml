@@ -1,8 +1,8 @@
 import QtQuick
 import QtQuick.Layouts
-import "../../../config"
-import "../../../services"
-import "../../../widgets"
+import qs.config
+import qs.services
+import qs.widgets
 
 Item {
   Layout.fillHeight: true

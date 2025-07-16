@@ -5,9 +5,9 @@ import QtQuick.Layouts
 import QtQuick.Controls
 import Quickshell
 import Quickshell.Hyprland
-import "../../../config"
-import "../../../services"
-import "../../../widgets"
+import qs.config
+import qs.services
+import qs.widgets
 
 Button {
   id: root

@@ -4,8 +4,8 @@ import Quickshell.Services.Mpris
 import Quickshell.Widgets
 import "../../../common/prettify.js" as Prettify
 import "../../../common/math.js" as MathExtended
-import "../../../config"
-import "../../../widgets"
+import qs.config
+import qs.widgets
 
 Item {
   id: root

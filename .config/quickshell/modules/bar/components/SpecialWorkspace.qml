@@ -1,8 +1,8 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell.Hyprland
-import "../../../config"
-import "../../../services"
+import qs.config
+import qs.services
 
 Item {
   Layout.fillHeight: true

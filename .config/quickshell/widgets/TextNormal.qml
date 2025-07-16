@@ -1,5 +1,5 @@
 import QtQuick
-import "../config"
+import qs.config
 
 Text {
   color: Appearance.color.text
