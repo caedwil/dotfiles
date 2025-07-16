@@ -104,7 +104,7 @@ Button {
 
         TextNormal {
           visible: !client.desktopEntry
-          text: client.modelData.class[0].toLowerCase()
+          text: client.modelData.class[0]?.toLowerCase()
           anchors.centerIn: parent
         }
       }
