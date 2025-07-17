@@ -31,7 +31,7 @@ Item {
     hoverEnabled: true
     onPressed: Hyprland.dispatch('global quickshell:dashboard-toggle')
     onEntered: {
-      icon.color = '#8bd5ca';
+      icon.color = Appearance.color.accent;
     }
     onExited: {
       icon.color = Appearance.color.text;
