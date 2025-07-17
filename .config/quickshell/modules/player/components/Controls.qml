@@ -17,7 +17,7 @@ Item {
 
     anchors.centerIn: parent
 
-    IconButton {
+    MaterialIconButton {
       text: "skip_previous"
       color: Appearance.color.text
       size: 32
@@ -26,7 +26,7 @@ Item {
       onPressed: root.player.previous()
     }
 
-    IconButton {
+    MaterialIconButton {
       text: root.player.isPlaying ? "pause_circle" : "play_circle"
       color: Appearance.color.text
       size: 40
@@ -35,7 +35,7 @@ Item {
       onPressed: root.player.togglePlaying()
     }
 
-    IconButton {
+    MaterialIconButton {
       text: "skip_next"
       color: Appearance.color.text
       size: 32

@@ -8,6 +8,7 @@ Item {
   property alias color: icon.color
   property alias size: icon.size
   property alias fill: icon.fill
+  property alias weight: icon.weight
 
   signal pressed
 
