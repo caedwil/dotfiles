@@ -19,6 +19,7 @@ Singleton {
     property color surface0: "#363a4f"
 
     property color text: "#cad3f5"
+    property color accent: "#8bd5ca"
   }
 
   property var font: QtObject {

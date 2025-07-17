@@ -42,7 +42,7 @@ Item {
 
       Rectangle {
         id: scrubber
-        color: bar.isHovered ? '#8bd5ca' : Appearance.color.text
+        color: bar.isHovered ? Appearance.color.accent : Appearance.color.text
         radius: Appearance.radius.full
         anchors.top: parent.top
         anchors.left: parent.left
