@@ -10,6 +10,7 @@ Scope {
 
   property bool anchorToBar: false
   property HyprlandMonitor monitor: Hyprland.focusedMonitor
+  property WindowManager.Window window: WindowManager.spotify
 
   // TODO: This could be a floating window instead. Would need corresponding
   // windowrules in Hyprland config - no decorations, floating. Alternatively,
@@ -17,7 +18,7 @@ Scope {
   GlobalShortcut {
     name: "player-spotify-toggle"
     onPressed: {
-      loader.active = !loader.active;
+      scope.window.toggle();
       scope.anchorToBar = false;
     }
   }
@@ -25,14 +26,14 @@ Scope {
   GlobalShortcut {
     name: "player-spotify-toggle-anchor-to-bar"
     onPressed: {
-      loader.active = !loader.active;
+      scope.window.toggle();
       scope.anchorToBar = true;
     }
   }
 
   LazyLoader {
     id: loader
-    active: false
+    active: scope.window.visible
 
     ModuleWindow {
       id: window

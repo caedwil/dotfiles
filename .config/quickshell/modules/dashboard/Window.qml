@@ -6,17 +6,19 @@ import qs.widgets
 Scope {
   id: scope
 
+  property WindowManager.Window window: WindowManager.dashboard
+
   // TODO: Should clicking elsewhere close the window... somehow?
   GlobalShortcut {
     name: "dashboard-toggle"
     onPressed: {
-      loader.active = !loader.active;
+      scope.window.toggle();
     }
   }
 
   LazyLoader {
     id: loader
-    active: false
+    active: scope.window.visible
 
     ModuleWindow {
       id: window
