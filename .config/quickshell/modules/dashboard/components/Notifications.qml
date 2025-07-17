@@ -9,7 +9,6 @@ Item {
 
   Rectangle {
     color: Appearance.color.crust
-    // border.color: Appearance.color.surface0
     radius: 8
     anchors.fill: parent
   }
@@ -23,7 +22,6 @@ Item {
 
     spacing: 0
 
-    // TODO: move to a component file.
     Item {
       Layout.fillWidth: true
       implicitHeight: row.implicitHeight + 24
@@ -52,17 +50,11 @@ Item {
       }
     }
 
-    // Rectangle {
-    //   Layout.fillWidth: true
-    //   implicitHeight: 1
-    //   color: Appearance.color.surface0
-    // }
-
     ColumnLayout {
       Layout.margins: 12
 
       TextNormal {
-        text: "I haven't setup notifications yet..."
+        text: "All caught up."
       }
     }
   }

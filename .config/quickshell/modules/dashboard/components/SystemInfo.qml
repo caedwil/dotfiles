@@ -11,7 +11,6 @@ Item {
 
   Rectangle {
     color: Appearance.color.mantle
-    // border.color: Appearance.color.surface0
     radius: 8
     anchors.fill: parent
   }
