@@ -1,4 +1,7 @@
+pragma ComponentBehavior: Bound
+
 import QtQuick.Layouts
+import Quickshell
 import qs.config
 import qs.services
 import qs.widgets
@@ -26,14 +29,69 @@ ColumnLayout {
 
     HorizontalSpacer {}
 
-    // TODO: Make the menu a module as it may end up getting used elsewhere.
-    MaterialIcon {
-      text: "power_settings_new"
-      color: Appearance.color.text
+    RowLayout {
+      spacing: 12
+
+      MaterialIconButton {
+        text: "logout"
+        color: hovered ? Appearance.color.accent : Appearance.color.text
+        onPressed: logoutModal.active = !logoutModal.active
+      }
+
+      MaterialIconButton {
+        text: "autorenew"
+        color: hovered ? Appearance.color.accent : Appearance.color.text
+        onPressed: rebootModal.active = !rebootModal.active
+      }
+
+      MaterialIconButton {
+        text: "power_settings_new"
+        color: hovered ? Appearance.color.accent : Appearance.color.text
+        onPressed: shutdownModal.active = !shutdownModal.active
+      }
     }
   }
 
   Components.SystemInfo {}
 
   Components.Notifications {}
+
+  LazyLoader {
+    id: logoutModal
+    active: false
+
+    ConfirmationModal {
+      content: "Are you sure you want to logout?"
+      confirmButtonContent: "Logout"
+
+      onCancel: logoutModal.active = false
+      onConfirm: Quickshell.execDetached(["loginctl", "terminate-user"])
+    }
+  }
+
+  LazyLoader {
+    id: rebootModal
+    active: false
+
+    ConfirmationModal {
+      content: "Are you sure you want to reboot?"
+      confirmButtonContent: "Reboot"
+
+      onCancel: rebootModal.active = false
+      onConfirm: Quickshell.execDetached(["systemctl", "reboot"])
+    }
+  }
+
+  LazyLoader {
+    id: shutdownModal
+    active: false
+
+    ConfirmationModal {
+      content: "Are you sure you want to shutdown?"
+      confirmButtonContent: "Shutdown"
+
+      onCancel: shutdownModal.active = false
+      onConfirm: Quickshell.execDetached(["systemctl", "poweroff"])
+    }
+  }
 }
