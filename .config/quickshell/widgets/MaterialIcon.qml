@@ -6,6 +6,7 @@ Text {
 
   property int size: Appearance.font.size.xlarge
   property real fill: 0
+  property int weight: 400
 
   renderType: Text.NativeRendering
 
@@ -15,7 +16,8 @@ Text {
     hintingPreference: Font.PreferFullHinting
     variableAxes: {
       "FILL": root.fill,
-      "opsz": root.size
+      "opsz": root.size,
+      "wght": root.weight
     }
   }
 }
