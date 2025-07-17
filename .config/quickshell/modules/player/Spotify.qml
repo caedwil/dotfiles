@@ -12,14 +12,15 @@ Scope {
   property HyprlandMonitor monitor: Hyprland.focusedMonitor
   property WindowManager.Window window: WindowManager.spotify
 
-  // TODO: This could be a floating window instead. Would need corresponding
-  // windowrules in Hyprland config - no decorations, floating. Alternatively,
-  // could allow for the "floating" PanelWindow to be moved by dragging it?
+  // This is to stop the window from moving between monitors as the mouse moves.
+  property int leftMarginForWindow: 0
+
   GlobalShortcut {
     name: "player-spotify-toggle"
     onPressed: {
       scope.window.toggle();
       scope.anchorToBar = false;
+      scope.leftMarginForWindow = 0;
     }
   }
 
@@ -28,6 +29,7 @@ Scope {
     onPressed: {
       scope.window.toggle();
       scope.anchorToBar = true;
+      scope.leftMarginForWindow = Position.playerX[scope.monitor.id];
     }
   }
 
@@ -36,13 +38,13 @@ Scope {
     active: scope.window.visible
 
     ModuleWindow {
-      id: window
+      managedWindow: scope.window
 
       anchors.top: true
       margins.top: scope.anchorToBar ? -(HyprlandExtended.gapsOut[0] + 1) : 16
 
       anchors.left: scope.anchorToBar
-      margins.left: scope.anchorToBar ? Position.playerX[scope.monitor.id] : 0
+      margins.left: scope.leftMarginForWindow
 
       topLeftRadius: scope.anchorToBar ? 0 : 8
       topRightRadius: scope.anchorToBar ? 0 : 8

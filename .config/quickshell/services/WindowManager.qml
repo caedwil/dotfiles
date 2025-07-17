@@ -8,8 +8,11 @@ Singleton {
   id: root
 
   component Window: QtObject {
+    id: item
+
     property string name
     property bool visible: false
+    property QsWindow window
 
     function show() {
       visible = true;
@@ -38,11 +41,12 @@ Singleton {
     name: "spotify"
   }
 
+  property var bars: []
   property var windows: [dashboard, spotify]
 
   function hideAll(exclude = []) {
     for (const window of windows) {
-      if (exclude.includes(window.name)) {
+      if (exclude.includes(window.name) || !window.visible) {
         continue;
       }
 

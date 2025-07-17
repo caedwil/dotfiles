@@ -1,8 +1,10 @@
 import QtQuick
 import QtQuick.Effects
 import Quickshell
+import Quickshell.Hyprland
 import Quickshell.Wayland
 import qs.config
+import qs.services
 
 PanelWindow { // qmllint disable
   id: window
@@ -12,6 +14,8 @@ PanelWindow { // qmllint disable
   property alias topRightRadius: background.topRightRadius
   property alias bottomLeftRadius: background.bottomLeftRadius
   property alias bottomRightRadius: background.bottomRightRadius
+
+  property WindowManager.Window managedWindow
 
   color: "transparent"
 
@@ -23,6 +27,21 @@ PanelWindow { // qmllint disable
 
   mask: Region {
     item: wrapper
+  }
+
+  HyprlandFocusGrab {
+    id: grab
+    windows: [window, ...WindowManager.bars]
+
+    onCleared: {
+      window.managedWindow.hide();
+    }
+  }
+
+  Component.onCompleted: {
+    if (managedWindow) {
+      grab.active = true;
+    }
   }
 
   Item {

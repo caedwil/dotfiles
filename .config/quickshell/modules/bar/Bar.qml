@@ -14,6 +14,10 @@ Scope {
     PanelWindow { // qmllint disable
       id: root
 
+      Component.onCompleted: {
+        WindowManager.bars.push(root);
+      }
+
       property var modelData
       screen: modelData
 

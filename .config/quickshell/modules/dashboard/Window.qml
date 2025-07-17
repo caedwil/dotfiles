@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 import Quickshell
 import Quickshell.Hyprland
 import qs.services
@@ -21,7 +23,7 @@ Scope {
     active: scope.window.visible
 
     ModuleWindow {
-      id: window
+      managedWindow: scope.window
 
       anchors.top: true
       margins.top: -(HyprlandExtended.gapsOut[0] + 1)
