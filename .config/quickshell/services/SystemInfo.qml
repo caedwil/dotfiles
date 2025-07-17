@@ -17,16 +17,25 @@ Singleton {
   FileView {
     id: stat
     path: "/proc/stat"
+    onLoaded: {
+      root.calculateCpuUsage();
+    }
   }
 
   FileView {
     id: meminfo
     path: "/proc/meminfo"
+    onLoaded: {
+      root.calculateMemoryUsage();
+    }
   }
 
   FileView {
     id: uptime
     path: "/proc/uptime"
+    onLoaded: {
+      root.calculateUptimeInSeconds();
+    }
   }
 
   Timer {
