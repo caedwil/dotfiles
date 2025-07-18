@@ -29,20 +29,23 @@ PanelWindow { // qmllint disable
     item: wrapper
   }
 
-  HyprlandFocusGrab {
-    id: grab
-    windows: [window, ...WindowManager.bars]
+  // TODO: This should be managed by the WindowManager. I also need to be able
+  // to add the confirmation modals to it as they currently can't be clicked on.
+  // For now... disabled.
+  // HyprlandFocusGrab {
+  //   id: grab
+  //   windows: [window, ...WindowManager.bars]
 
-    onCleared: {
-      window.managedWindow.hide();
-    }
-  }
+  //   onCleared: {
+  //     window.managedWindow.hide();
+  //   }
+  // }
 
-  Component.onCompleted: {
-    if (managedWindow) {
-      grab.active = true;
-    }
-  }
+  // Component.onCompleted: {
+  //   if (managedWindow) {
+  //     grab.active = true;
+  //   }
+  // }
 
   Item {
     id: wrapper

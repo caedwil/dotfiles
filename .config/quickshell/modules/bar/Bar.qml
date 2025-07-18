@@ -7,6 +7,8 @@ import qs.config
 import qs.services
 import qs.widgets
 
+// TODO: Setup a mouse area covering the bar to handle dismissing active windows
+// on click outside.
 Scope {
   Variants {
     model: Quickshell.screens
