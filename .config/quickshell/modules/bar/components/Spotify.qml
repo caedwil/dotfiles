@@ -10,7 +10,7 @@ import qs.widgets
 
 Item {
   id: root
-  property MprisPlayer player: MprisController.getPlayerByName("Spotify")
+  property MprisPlayer player: Media.getPlayerByName("Spotify")
 
   Layout.fillHeight: true
   implicitWidth: (root.player ? 320 : layout.implicitWidth) + (Appearance.bar.padding * 2)

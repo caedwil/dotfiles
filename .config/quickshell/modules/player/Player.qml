@@ -12,7 +12,7 @@ ColumnLayout {
   id: root
 
   required property string name
-  property MprisPlayer player: MprisController.getPlayerByName(name)
+  property MprisPlayer player: Media.getPlayerByName(name)
 
   FrameAnimation {
     running: root.player?.playbackState == MprisPlaybackState.Playing
