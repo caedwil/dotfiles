@@ -29,7 +29,7 @@ Item {
     anchors.fill: parent
     cursorShape: Qt.PointingHandCursor
     hoverEnabled: true
-    onPressed: Hyprland.dispatch('global quickshell:dashboard-toggle')
+    onPressed: Hyprland.dispatch('global quickshell:dashboard-toggle-anchor-to-bar')
     onEntered: {
       icon.color = Appearance.color.accent;
     }
