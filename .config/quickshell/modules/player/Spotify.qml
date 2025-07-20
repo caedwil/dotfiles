@@ -2,6 +2,7 @@ pragma ComponentBehavior: Bound
 
 import Quickshell
 import Quickshell.Hyprland
+import Quickshell.Services.Mpris
 import qs.services
 import qs.widgets
 
@@ -11,6 +12,7 @@ Scope {
   property bool anchorToBar: false
   property HyprlandMonitor monitor: Hyprland.focusedMonitor
   property WindowManager.Window window: WindowManager.spotify
+  property MprisPlayer player: Media.getPlayerByName("Spotify")
 
   // This is to stop the window from moving between monitors as the mouse moves.
   property int leftMarginForWindow: 0
@@ -18,6 +20,11 @@ Scope {
   GlobalShortcut {
     name: "player-spotify-toggle"
     onPressed: {
+      if (!scope.window.visible && !scope.player) {
+        Hyprland.dispatch("exec [workspace 5] spotify-launcher");
+        return;
+      }
+
       scope.window.toggle();
       scope.anchorToBar = false;
       scope.leftMarginForWindow = 0;
