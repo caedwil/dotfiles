@@ -20,6 +20,9 @@ Singleton {
 
     property color text: "#cad3f5"
     property color accent: "#8bd5ca"
+
+    property color subtext0: "#b8c0e0"
+    property color subtext1: "#a5adcb"
   }
 
   property var font: QtObject {
@@ -29,7 +32,7 @@ Singleton {
     }
 
     property var size: QtObject {
-      property int small: 10
+      property int small: 11
       property int normal: 13
       property int large: 16
       property int xlarge: 18
