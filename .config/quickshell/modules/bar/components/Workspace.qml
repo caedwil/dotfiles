@@ -5,6 +5,7 @@ import QtQuick.Layouts
 import QtQuick.Controls
 import Quickshell
 import Quickshell.Hyprland
+import Quickshell.Widgets
 import qs.config
 import qs.services
 import qs.widgets
@@ -92,7 +93,7 @@ Button {
         Layout.alignment: Qt.AlignLeft
         Layout.leftMargin: index == 0 ? 0 : -6
 
-        Image {
+        IconImage {
           id: icon
           visible: client.desktopEntry
           source: Quickshell.iconPath(client.desktopEntry?.icon)
