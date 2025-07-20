@@ -1,9 +1,12 @@
 //@ pragma UseQApplication
 
+import QtQuick
 import Quickshell
 import qs.modules.bar
 import qs.modules.dashboard as Dashboard
 import qs.modules.player
+
+import qs.services
 
 ShellRoot {
   LazyLoader {
@@ -17,4 +20,8 @@ ShellRoot {
   }
 
   Dashboard.Window {}
+
+  Component.onCompleted: {
+    Notifications.init();
+  }
 }

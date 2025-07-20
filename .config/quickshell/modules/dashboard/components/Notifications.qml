@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import qs.config
+import qs.services
 import qs.widgets
 
 Item {
@@ -37,7 +38,9 @@ Item {
         id: row
 
         spacing: 8
-        anchors.centerIn: parent
+        anchors.fill: parent
+        anchors.leftMargin: 12
+        anchors.rightMargin: 12
 
         MaterialIcon {
           text: "notifications"
@@ -45,16 +48,35 @@ Item {
         }
 
         TextNormal {
-          text: "Notifications"
+          text: `Notifications ${Notifications.groups.length > 0 ? "(" + Notifications.groups.length + ")" : ""}`
+        }
+
+        HorizontalSpacer {}
+
+        // TODO: turn into a button to enable/disable popups.
+        TextNormal {
+          text: "Popups OFF"
+          color: Appearance.color.subtext1
         }
       }
     }
 
     ColumnLayout {
       Layout.margins: 12
+      spacing: 8
 
       TextNormal {
         text: "All caught up."
+        visible: Notifications.groups.length == 0
+      }
+
+      Repeater {
+        model: Notifications.groups
+
+        Notification {
+          required property Notifications.NotificationGroup modelData
+          group: modelData
+        }
       }
     }
   }
