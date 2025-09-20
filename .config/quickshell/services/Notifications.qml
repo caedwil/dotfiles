@@ -14,8 +14,8 @@ Singleton {
   }
 
   NotificationServer {
-    actionsSupported: true
     actionIconsSupported: false
+    actionsSupported: true
     bodyHyperlinksSupported: true
     bodyImagesSupported: false
     bodyMarkupSupported: true
@@ -28,17 +28,21 @@ Singleton {
       notification.tracked = true;
 
       const id = notification.appName + ":" + notification.summary;
-      const group = root.groups.find(group => group.id == id);
+      let group = root.groups.find(group => group.id == id);
 
       if (!group) {
-        root.groups.push(groupComponent.createObject(root, {
-          notifications: [notification]
-        }));
-        return;
+        root.groups.push(groupComponent.createObject(root, {}));
+        group = root.groups[root.groups.length - 1];
       }
 
-      group.notifications.push(notification);
+      group.add(notification);
     }
+  }
+
+  Component {
+    id: groupComponent
+
+    NotificationGroup {}
   }
 
   // TODO: popups.
@@ -60,19 +64,21 @@ Singleton {
 
     readonly property Timer timer: Timer {
       interval: 5000
-      running: true
       repeat: true
+      running: true
+
       onTriggered: {
         group.updateElapsedInSeconds();
       }
     }
 
-    onNotificationsChanged: {
-      updateTimestamp();
-    }
-
-    onSummaryChanged: {
-      updateTimestamp();
+    function add(notification: Notification) {
+      group.notifications.push(notification);
+      notification.closed.connect(() => {
+        group.notifications = group.notifications.filter(({
+            id
+          }) => id != notification.id);
+      });
     }
 
     function dismiss() {
@@ -81,7 +87,6 @@ Singleton {
       }
 
       root.groups = root.groups.filter(item => item.id != group.id);
-      group.destroy();
     }
 
     function updateElapsedInSeconds() {
@@ -92,10 +97,18 @@ Singleton {
       group.timestamp = new Date();
       group.updateElapsedInSeconds();
     }
-  }
 
-  Component {
-    id: groupComponent
-    NotificationGroup {}
+    onNotificationsChanged: {
+      if (notifications.length == 0) {
+        dismiss();
+        return;
+      }
+
+      updateTimestamp();
+    }
+
+    onSummaryChanged: {
+      updateTimestamp();
+    }
   }
 }
